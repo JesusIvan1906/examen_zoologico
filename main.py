@@ -1,4 +1,4 @@
-from Animal import Animal, cargar_csv_a_lista, guardar_lista_a_csv
+from animal import Animal, cargar_csv_a_lista, guardar_lista_a_csv
 
 def mostrar_menu():
     print("\n" + "="*30)
@@ -17,6 +17,36 @@ def ejecutar_programa():
     
     animales_objetos = [Animal(d) for d in datos_zoo]
 
-    dict_nombres_clases = {c['class_type']: c['class_category'] for c in datos_clases}
+    dict_nombres_clases = {c['Clase_id']: c['Clase_tipo'] for c in datos_clases}
 
-    
+    while True:
+        opcion = mostrar_menu()
+
+        if opcion == '1':
+            print("\nClases disponibles:", dict_nombres_clases)
+            id_buscado = input("Ingrese el ID de la clase a filtrar: ")
+            print(f"\n--- Animales de la clase {id_buscado} ---")
+            for a in animales_objetos:
+                if a.clase_id == id_buscado:
+                    print(a)
+
+        elif opcion == '2':
+            print("\nCaracterísticas: hair, feathers, eggs, milk, airborne, aquatic, predator, etc.")
+            feat = input("¿Qué característica desea buscar?: ").lower()
+            print(f"\n--- Animales con {feat} ---")
+            for a in animales_objetos:
+                
+                if a.datos.get(feat) == '1':
+                    print(a)
+
+        elif opcion == '3':
+            nombre = input("Nombre del nuevo animal: ").lower()
+            print("Clases:", dict_nombres_clases)
+            clase = input("Ingrese el ID de la clase: ")
+           
+            plantilla = {k: '0' for k in datos_zoo[0].keys()}
+            plantilla['animal_name'] = nombre
+            plantilla['class_type'] = clase
+            
+            
+           

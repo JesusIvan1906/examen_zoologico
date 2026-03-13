@@ -45,8 +45,25 @@ def ejecutar_programa():
             clase = input("Ingrese el ID de la clase: ")
            
             plantilla = {k: '0' for k in datos_zoo[0].keys()}
-            plantilla['animal_name'] = nombre
-            plantilla['class_type'] = clase
+            plantilla['Clase_id'] = nombre
+            plantilla['Clase_tipo'] = clase
             
             
+            tiene_pelo = input("¿Tiene pelo? (s/n): ")
+            plantilla['hair'] = '1' if tiene_pelo.lower() == 's' else '0'
+            
+            
+            animales_objetos.append(Animal(plantilla))
+            print(f"¡{nombre} agregado exitosamente!")
+
+        elif opcion == '4':
            
+            lista_final = [a.datos for a in animales_objetos]
+            guardar_lista_a_csv('zoo.csv', lista_final)
+            print("Datos guardados en zoo.csv. Saliendo...")
+            break
+        else:
+            print("Opción no válida.")
+
+if __name__ == "__main__":
+    ejecutar_programa()
